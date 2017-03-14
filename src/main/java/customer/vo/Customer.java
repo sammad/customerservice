@@ -9,7 +9,6 @@ public class Customer {
 	private String customerName;
 	private Double customerAge;
 	
-	
 	public Customer(CustomerBuilder customerBuilder) {
 		this.customerId =customerBuilder.customerId;
 		this.customerName = customerBuilder.customerName;
@@ -48,7 +47,10 @@ public class Customer {
 				+ "]";
 	}
 	
-	static class CustomerBuilder {
+	public static CustomerBuilder getBuilder(){
+		return new CustomerBuilder();
+	}
+	public static class CustomerBuilder {
 		private Integer customerId;
 		private String customerName;
 		private Double customerAge;
