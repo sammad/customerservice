@@ -8,8 +8,7 @@ import customer.vo.Customer;
 
 public interface CustomerRepository extends MongoRepository<Customer, Integer> {
 
-	/*void deleteCustomer(Customer customer);
-	List<Customer> findAllCustomer();
-	Customer findCustomer(Integer customer);*/
-	/*Customer createCustomer(Customer customer);*/
+	/*void deletebyCustomerId(Customer customer);
+	List<Customer> findAll();
+	Customer findByCustomerId(Integer customer);*/
 }

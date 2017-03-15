@@ -6,6 +6,12 @@ public class CustomerDTO {
 	private String customerName;
 	private Double customerAge;
 	
+	public CustomerDTO(String customerName, Double customerAge) {
+		super();
+		this.customerName = customerName;
+		this.customerAge = customerAge;
+	}
+
 	public CustomerDTO(Integer customerID, String customerName, Double customerAge) {
 		super();
 		this.customerID = customerID;

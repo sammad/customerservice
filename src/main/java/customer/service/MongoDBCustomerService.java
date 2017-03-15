@@ -1,5 +1,6 @@
 package customer.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,12 @@ public class MongoDBCustomerService implements CustomerService {
 
 	@Override
 	public List<CustomerDTO> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return convertToDTOList(customerRepository.findAll());
 	}
 
 	@Override
-	public CustomerDTO find(Integer customer) {
-		// TODO Auto-generated method stub
-		return null;
+	public CustomerDTO find(Integer customerId) {
+		return convertToDTO(customerRepository.findOne(customerId));
 	}
 
 	@Override
@@ -43,6 +42,12 @@ public class MongoDBCustomerService implements CustomerService {
 
 	private CustomerDTO convertToDTO(Customer customer) {
 		return new CustomerDTO(customer.getCustomerId(), customer.getCustomerName(), customer.getCustomerAge());
+	}
+	
+	private List<CustomerDTO> convertToDTOList(List<Customer> customers) {
+		List<CustomerDTO> customerDTOs =new ArrayList<>();
+		customers.stream().forEach(customer->customerDTOs.add(new CustomerDTO(customer.getCustomerId(), customer.getCustomerName(), customer.getCustomerAge())));
+		return customerDTOs;
 	}
 
 }

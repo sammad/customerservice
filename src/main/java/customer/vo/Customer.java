@@ -1,5 +1,7 @@
 package customer.vo;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.springframework.data.annotation.Id;
 
 public class Customer {
@@ -9,8 +11,9 @@ public class Customer {
 	private String customerName;
 	private Double customerAge;
 	
+	public Customer(){}
 	public Customer(CustomerBuilder customerBuilder) {
-		this.customerId =customerBuilder.customerId;
+		this.customerId =Math.abs(ThreadLocalRandom.current().nextInt());
 		this.customerName = customerBuilder.customerName;
 		this.customerAge=customerBuilder.customerAge;
 	}
@@ -35,6 +38,13 @@ public class Customer {
 		return customerAge;
 	}
 
+
+	public Customer(Integer customerId, String customerName, Double customerAge) {
+		super();
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.customerAge = customerAge;
+	}
 
 	public void setCustomerAge(Double customerAge) {
 		this.customerAge = customerAge;
