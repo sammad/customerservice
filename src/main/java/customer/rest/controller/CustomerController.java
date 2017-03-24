@@ -18,17 +18,6 @@ public class CustomerController {
 	public CustomerDTO create(@RequestParam(value="name")String customerName,@RequestParam(value="age")Double age) {
         return customerService.create(new CustomerDTO(customerName,age));
     }
-	/*@RequestMapping(path="/customer", method=RequestMethod.GET)
-	public CustomerDTO findCustomerByName(@RequestParam(value="name")String customerName){
-		CustomerDTO customerDTO=null;
-		List<CustomerDTO> customers=customerService.findAll();
-		for(CustomerDTO customer:customers){
-			if(customer.getCustomerName().equals(customerName)){
-				customerDTO=customer;
-			}
-		}
-		return customerDTO;
-	}*/
 	
 	@RequestMapping(path="/customer", method=RequestMethod.GET)
 	public CustomerDTO findCustomerByID(@RequestParam(value="id")Integer customerId){
@@ -39,8 +28,13 @@ public class CustomerController {
 	@RequestMapping(path="/customer", method=RequestMethod.DELETE)
 	public CustomerDTO deleteCustomerByID(@RequestParam(value="id")Integer customerId){
 		CustomerDTO customerDTO=customerService.find(customerId);
-		customerService.delete(customerDTO);
-		return customerDTO;
+		if(customerDTO!=null){
+			customerService.delete(customerDTO);
+			return customerDTO;
+		}else{
+			return null;
+		}
+		
 	}
 	
 	@RequestMapping(path="/customer", method=RequestMethod.POST)

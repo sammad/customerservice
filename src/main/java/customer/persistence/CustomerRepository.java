@@ -1,7 +1,5 @@
 package customer.persistence;
 
-import java.util.List;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import customer.vo.Customer;

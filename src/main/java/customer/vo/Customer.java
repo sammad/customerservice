@@ -2,8 +2,11 @@ package customer.vo;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.data.annotation.Id;
 
+@XmlRootElement
 public class Customer {
 
 	@Id

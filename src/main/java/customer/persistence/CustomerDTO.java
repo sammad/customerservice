@@ -1,5 +1,8 @@
 package customer.persistence;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class CustomerDTO {
 
 	private Integer customerID;
