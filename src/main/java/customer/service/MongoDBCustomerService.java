@@ -16,9 +16,12 @@ public class MongoDBCustomerService implements CustomerService {
 	private CustomerRepository customerRepository;
 	
 	@Override
-	public void delete(CustomerDTO customer) {
-		
-
+	public void delete(CustomerDTO customerDTO) {
+		Customer customer=Customer.getBuilder()
+				.customerId(customerDTO.getCustomerID())
+				.customerAge(customerDTO.getCustomerAge())
+				.customerName(customerDTO.getCustomerName()).build();
+		customerRepository.delete(customer);
 	}
 
 	@Override
@@ -40,14 +43,24 @@ public class MongoDBCustomerService implements CustomerService {
 		return convertToDTO(customerRepository.save(customer));
 	}
 
+	
 	private CustomerDTO convertToDTO(Customer customer) {
-		return new CustomerDTO(customer.getCustomerId(), customer.getCustomerName(), customer.getCustomerAge());
+		return (customer!=null)?new CustomerDTO(customer.getCustomerId(), customer.getCustomerName(), customer.getCustomerAge()):null;
 	}
 	
 	private List<CustomerDTO> convertToDTOList(List<Customer> customers) {
 		List<CustomerDTO> customerDTOs =new ArrayList<>();
 		customers.stream().forEach(customer->customerDTOs.add(new CustomerDTO(customer.getCustomerId(), customer.getCustomerName(), customer.getCustomerAge())));
 		return customerDTOs;
+	}
+
+	@Override
+	public CustomerDTO update(CustomerDTO customerDTO) {
+		Customer customer=Customer.getBuilder()
+				.customerId(customerDTO.getCustomerID())
+				.customerAge(customerDTO.getCustomerAge())
+				.customerName(customerDTO.getCustomerName()).build();
+		return convertToDTO(customerRepository.save(customer));
 	}
 
 }

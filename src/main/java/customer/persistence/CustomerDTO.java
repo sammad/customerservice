@@ -19,6 +19,14 @@ public class CustomerDTO {
 		this.customerAge = customerAge;
 	}
 
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public void setCustomerAge(Double customerAge) {
+		this.customerAge = customerAge;
+	}
+
 	public Integer getCustomerID() {
 		return customerID;
 	}

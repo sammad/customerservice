@@ -1,7 +1,5 @@
 package customer.rest.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,8 +18,8 @@ public class CustomerController {
 	public CustomerDTO create(@RequestParam(value="name")String customerName,@RequestParam(value="age")Double age) {
         return customerService.create(new CustomerDTO(customerName,age));
     }
-	@RequestMapping(path="/customer", method=RequestMethod.GET)
-	public CustomerDTO findCustomer(@RequestParam(value="name")String customerName){
+	/*@RequestMapping(path="/customer", method=RequestMethod.GET)
+	public CustomerDTO findCustomerByName(@RequestParam(value="name")String customerName){
 		CustomerDTO customerDTO=null;
 		List<CustomerDTO> customers=customerService.findAll();
 		for(CustomerDTO customer:customers){
@@ -30,7 +28,30 @@ public class CustomerController {
 			}
 		}
 		return customerDTO;
+	}*/
+	
+	@RequestMapping(path="/customer", method=RequestMethod.GET)
+	public CustomerDTO findCustomerByID(@RequestParam(value="id")Integer customerId){
+		CustomerDTO customerDTO=customerService.find(customerId);
+		return customerDTO;
 	}
+	
+	@RequestMapping(path="/customer", method=RequestMethod.DELETE)
+	public CustomerDTO deleteCustomerByID(@RequestParam(value="id")Integer customerId){
+		CustomerDTO customerDTO=customerService.find(customerId);
+		customerService.delete(customerDTO);
+		return customerDTO;
+	}
+	
+	@RequestMapping(path="/customer", method=RequestMethod.POST)
+	public CustomerDTO updateCustomer(@RequestParam(value="id")Integer customerId,@RequestParam(value="name")String name,@RequestParam(value="age")Double age){
+		CustomerDTO customerDTO=customerService.find(customerId);
+		customerDTO.setCustomerAge(age);
+		customerDTO.setCustomerName(name);
+		customerDTO=customerService.update(customerDTO);
+		return customerDTO;
+	}
+	
 	@RequestMapping("/greeting")
 	public String greeting(@RequestParam(value="name")String customerName) {
         return "hello "+customerName;

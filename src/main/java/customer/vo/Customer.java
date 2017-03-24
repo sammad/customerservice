@@ -13,7 +13,8 @@ public class Customer {
 	
 	public Customer(){}
 	public Customer(CustomerBuilder customerBuilder) {
-		this.customerId =Math.abs(ThreadLocalRandom.current().nextInt());
+		this.customerId =(customerBuilder.customerId==null)?Math.abs(ThreadLocalRandom.current().nextInt())
+						:customerBuilder.customerId;
 		this.customerName = customerBuilder.customerName;
 		this.customerAge=customerBuilder.customerAge;
 	}

@@ -10,4 +10,5 @@ public interface CustomerService {
 	List<CustomerDTO> findAll();
 	CustomerDTO find(Integer customer);
 	CustomerDTO create(CustomerDTO customer);
+	CustomerDTO update(CustomerDTO customer);
 }
