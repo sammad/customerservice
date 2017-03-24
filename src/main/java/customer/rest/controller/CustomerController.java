@@ -1,6 +1,7 @@
 package customer.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,9 +20,9 @@ public class CustomerController {
         return customerService.create(new CustomerDTO(customerName,age));
     }
 	
-	@RequestMapping(path="/customer", method=RequestMethod.GET)
-	public CustomerDTO findCustomerByID(@RequestParam(value="id")Integer customerId){
-		CustomerDTO customerDTO=customerService.find(customerId);
+	@RequestMapping(path="/customer/{id}", method=RequestMethod.GET)
+	public CustomerDTO findCustomerByID(@PathVariable Integer id){
+		CustomerDTO customerDTO=customerService.find(id);
 		return customerDTO;
 	}
 	
