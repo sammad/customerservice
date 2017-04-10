@@ -1,6 +1,9 @@
 package customer.rest.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +14,7 @@ import customer.persistence.CustomerDTO;
 import customer.service.CustomerService;
 
 @RestController
+@EnableEurekaClient
 public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
@@ -26,6 +30,12 @@ public class CustomerController {
 		return customerDTO;
 	}
 	
+	@RequestMapping(path="/customerAll", method=RequestMethod.GET)
+	public List<CustomerDTO> findAllCustomers(){
+		List<CustomerDTO> customerDTOs=customerService.findAll();
+		return customerDTOs;
+	}
+
 	@RequestMapping(path="/customer", method=RequestMethod.DELETE)
 	public CustomerDTO deleteCustomerByID(@RequestParam(value="id")Integer customerId){
 		CustomerDTO customerDTO=customerService.find(customerId);
